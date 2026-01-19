@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>晚安数据号官方导航</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: linear-gradient(135deg, #FF9A8B 0%, #FF6B95 50%, #FF8E53 100%);
+            --secondary: linear-gradient(135deg, #72EDF2 0%, #5151E5 100%);
+            --tertiary: linear-gradient(135deg, #FFC3A0 0%, #FFAFBD 100%);
+            --quaternary: linear-gradient(135deg, #A18CD1 0%, #FBC2EB 100%);
+            --quinary: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%);
+            --senary: linear-gradient(135deg, #FFD3A5 0%, #FD6585 100%);
+            --glass: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --text: #2E2E2E;
+            --text-light: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: var(--text);
+            touch-action: manipulation;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 420px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+        }
+
+        /* 公告区域样式 */
+        .announcement {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            animation: fadeIn 0.8s ease-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-size: 0.9em;
+            flex-shrink: 0;
+        }
+
+        .announcement-icon {
+            margin-right: 10px;
+            color: #FFD700;
+            font-size: 1.1em;
+            animation: pulse 2s infinite;
+            flex-shrink: 0;
+        }
+
+        .announcement-text {
+            font-size: 0.85em;
+            font-weight: 500;
+            color: var(--text-light);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .avatar-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: float 6s ease-in-out infinite;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .avatar:hover {
+            transform: scale(1.08) rotate(5deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .main-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .main-buttons::-webkit-scrollbar {
+            display: none;
+        }
+
+        .btn {
+            padding: 14px 18px;
+            border-radius: 14px;
+            font-size: 0.95em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            color: var(--text-light);
+            z-index: 1;
+            flex-shrink: 0;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::after {
+            transform: translateX(0);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            box-shadow: 0 6px 15px rgba(255, 106, 149, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            box-shadow: 0 6px 15px rgba(114, 237, 242, 0.4);
+        }
+
+        .btn-tertiary {
+            background: var(--tertiary);
+            box-shadow: 0 6px 15px rgba(255, 195, 160, 0.4);
+        }
+
+        .btn-quaternary {
+            background: var(--quaternary);
+            box-shadow: 0 6px 15px rgba(161, 140, 209, 0.4);
+        }
+
+        .btn-quinary {
+            background: var(--quinary);
+            box-shadow: 0 6px 15px rgba(132, 250, 176, 0.4);
+        }
+
+        .btn-senary {
+            background: var(--senary);
+            box-shadow: 0 6px 15px rgba(253, 101, 133, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .icon {
+            font-size: 1.1em;
+        }
+
+        /* 永久地址样式 */
+        .permanent-url {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: var(--text-light);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+        }
+
+        .permanent-url a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .permanent-url a:hover {
+            text-decoration: underline;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .card {
+                padding: 22px;
+                border-radius: 18px;
+                max-width: 400px;
+            }
+            
+            .avatar {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .announcement {
+                padding: 10px 12px;
+                font-size: 0.85em;
+            }
+            
+            .btn {
+                padding: 13px 16px;
+                font-size: 0.9em;
+            }
+            
+            .permanent-url {
+                font-size: 0.85em;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .avatar {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .btn {
+                padding: 12px 14px;
+                font-size: 0.85em;
+            }
+            
+            .announcement {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+ 
+                <!-- 公告区域 -->
+        
+        
+        <div class="avatar-container">
+            <img src="https://晚安.com/jtm.png" alt="头像" class="avatar">
+        </div>
+        
+        <div class="main-buttons">
+            
+            <a href="https://new.kaijunjs.com/shop/GH1O7HTW" class="btn btn-secondary">
+                <i class="icon fas fa-shopping-cart"></i>
+                晚安虚拟机官方卡网
+            </a>
+            <a href="" class="btn btn-tertiary">
+                <i class="icon fas fa-comments"></i>
+                点我联系微信售后客服
+            <a>
+            <a href="https://t.me/wanannb666jiao" class="btn btn-primary">
+                <i class="icon fas fa-bell"></i>
+                晚安官方频道:@wanannb666jiao
+            </a>
+        
+        <!-- 永久地址 -->
+        <div class="permanent-url">
+            永久地址: <a href="
+" target="_blank"></a>（收藏不迷路）
+            <div class="copyright">
+            &copy; <span id="current-year"></span> 
+            
+            <span id="current-year"></span> <br>
+        </div>
+    </div>
+    
+    
+    
+    
+    <style>
+        /* 其他样式保持不变... */
+        
+        /* 新增版权样式 */
+        .copyright {
+            text-align: center;
+            margin-top: 8px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.75em;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+    </style>
+
+    <script>
+        // 自动更新年份
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+  </html>
